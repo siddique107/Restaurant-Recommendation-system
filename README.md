@@ -48,7 +48,6 @@ Restaurant-Recommendation-System/ │ ├── Flask/ │ ├── app1.py │
 
 📸 Screenshots
 🏠 Home Page
-Home Page
 <img width="1902" height="911" alt="Screenshot 2026-04-14 101259" src="https://github.com/user-attachments/assets/111c7981-0096-4142-858a-be93b4578b7e" />
 <img width="1898" height="1070" alt="Screenshot 2026-04-14 101326" src="https://github.com/user-attachments/assets/7829b7b1-7611-4b5b-9ed0-a0ed510cee9f" />
 
@@ -57,7 +56,6 @@ Form Page
 <img width="1896" height="903" alt="Screenshot 2026-04-14 101454" src="https://github.com/user-attachments/assets/19d22320-9118-425b-9eeb-bde5f07d83bc" />
 
 📊 Result Page
-Result Page Result Page
 <img width="1918" height="907" alt="Screenshot 2026-04-14 101517" src="https://github.com/user-attachments/assets/8155382f-e4ed-43e4-94b8-9099a6c55274" />
 <img width="1894" height="905" alt="Screenshot 2026-04-14 101538" src="https://github.com/user-attachments/assets/33e8aa99-d77e-405d-89c5-9f42a9d46863" />
 
