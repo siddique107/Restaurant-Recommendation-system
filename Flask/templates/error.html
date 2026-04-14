@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>No Results Found — DineFind</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        --navy:       #1a1a2e;
+        --navy-deep:  #121220;
+        --card:       #0f3460;
+        --red:        #e94560;
+        --red-dark:   #c73652;
+        --red-soft:   rgba(233,69,96,0.10);
+        --white:      #ffffff;
+        --muted:      #8b9dc3;
+        --border:     rgba(255,255,255,0.08);
+        --border-red: rgba(233,69,96,0.35);
+        --radius:     14px;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background: var(--navy);
+        color: var(--white);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* ── NAV ── */
+      nav {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 0 60px; height: 68px;
+        background: var(--navy-deep); border-bottom: 1px solid var(--border);
+      }
+      .nav-brand {
+        display: flex; align-items: center; gap: 10px;
+        font-size: 19px; font-weight: 800;
+        color: var(--white); text-decoration: none; letter-spacing: -0.3px;
+      }
+      .nav-brand .dot { color: var(--red); }
+      .brand-icon {
+        width: 34px; height: 34px; background: var(--red);
+        border-radius: 9px; display: flex; align-items: center;
+        justify-content: center; font-size: 15px;
+      }
+      .nav-links a {
+        text-decoration: none; color: var(--muted); font-weight: 500;
+        font-size: 14px; padding: 7px 16px; border-radius: 8px;
+        transition: all 0.2s; margin-left: 4px;
+      }
+      .nav-links a:hover { color: var(--white); background: var(--border); }
+
+      /* ── PAGE BODY ── */
+      .page-body {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 24px;
+      }
+
+      .error-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        padding: 56px 48px;
+        max-width: 520px;
+        width: 100%;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .error-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 3px;
+        background: var(--red);
+      }
+
+      .error-icon {
+        width: 80px; height: 80px;
+        background: var(--red-soft);
+        border: 1px solid var(--border-red);
+        border-radius: 20px;
+        display: flex; align-items: center; justify-content: center;
+        margin: 0 auto 28px;
+        font-size: 30px;
+        color: var(--red);
+      }
+
+      .error-card h1 {
+        font-size: 24px; font-weight: 800;
+        letter-spacing: -0.5px; margin-bottom: 18px;
+      }
+
+      .error-message {
+        font-size: 14px;
+        color: var(--muted);
+        line-height: 1.75;
+        margin-bottom: 32px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-left: 3px solid var(--red);
+        padding: 14px 18px;
+        border-radius: 0 10px 10px 0;
+        text-align: left;
+      }
+
+      .btn-group {
+        display: flex; gap: 12px;
+        justify-content: center; flex-wrap: wrap;
+      }
+
+      .btn-primary {
+        display: inline-flex; align-items: center; gap: 8px;
+        background: var(--red); color: var(--white);
+        padding: 12px 26px; border-radius: 50px;
+        font-weight: 700; font-size: 14px; text-decoration: none;
+        transition: all 0.22s;
+      }
+      .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+      .btn-outline {
+        display: inline-flex; align-items: center; gap: 8px;
+        border: 1px solid var(--border-red);
+        color: var(--red);
+        padding: 11px 22px; border-radius: 50px;
+        font-weight: 600; font-size: 14px; text-decoration: none;
+        transition: all 0.22s;
+      }
+      .btn-outline:hover { background: var(--red-soft); }
+
+      /* ── TIPS ── */
+      .tips {
+        margin-top: 32px;
+        border-top: 1px solid var(--border);
+        padding-top: 26px;
+        text-align: left;
+      }
+      .tips-label {
+        display: flex; align-items: center; gap: 8px;
+        font-size: 11px; font-weight: 700;
+        color: var(--muted); text-transform: uppercase;
+        letter-spacing: 0.7px; margin-bottom: 16px;
+      }
+      .tips-label i { color: var(--red); font-size: 10px; }
+
+      .tips ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+      .tips li {
+        display: flex; align-items: flex-start; gap: 12px;
+        font-size: 13px; color: var(--muted); line-height: 1.55;
+      }
+      .tip-dot {
+        width: 18px; height: 18px; flex-shrink: 0;
+        background: var(--red-soft); border: 1px solid var(--border-red);
+        border-radius: 50%; margin-top: 1px;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .tip-dot i { font-size: 8px; color: var(--red); }
+
+      /* ── FOOTER ── */
+      footer {
+        text-align: center; padding: 24px;
+        color: var(--muted); font-size: 13px;
+        border-top: 1px solid var(--border);
+      }
+      footer span { color: var(--red); }
+
+      @media (max-width: 600px) {
+        nav { padding: 0 20px; }
+        .error-card { padding: 40px 24px; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <nav>
+      <a class="nav-brand" href="/">
+        <div class="brand-icon"><i class="fa-solid fa-utensils"></i></div>
+        Dine<span class="dot">Find</span>
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/recommend">Search</a>
+      </div>
+    </nav>
+
+    <div class="page-body">
+      <div class="error-card">
+
+        <div class="error-icon">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <h1>No Results Found</h1>
+
+        <div class="error-message">{{ message }}</div>
+
+        <div class="btn-group">
+          <a href="/recommend" class="btn-primary">
+            <i class="fa-solid fa-rotate-left"></i> Try Again
+          </a>
+          <a href="/" class="btn-outline">
+            <i class="fa-solid fa-house"></i> Home
+          </a>
+        </div>
+
+        <div class="tips">
+          <div class="tips-label">
+            <i class="fa-solid fa-lightbulb"></i> Helpful Tips
+          </div>
+          <ul>
+            <li>
+              <div class="tip-dot"><i class="fa-solid fa-info"></i></div>
+              Double-check the restaurant name spelling
+            </li>
+            <li>
+              <div class="tip-dot"><i class="fa-solid fa-info"></i></div>
+              Try selecting "Any Cuisine" and "Any Budget" to broaden results
+            </li>
+            <li>
+              <div class="tip-dot"><i class="fa-solid fa-info"></i></div>
+              Partial names may not match — use the full restaurant name
+            </li>
+            <li>
+              <div class="tip-dot"><i class="fa-solid fa-info"></i></div>
+              Lower the minimum rating to see more options
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <footer>
+      &copy; 2026 Dine<span>Find</span> &nbsp;&middot;&nbsp; Developed by &middot;&nbsp; Siddique Sanadi
+    </footer>
+
+  </body>
+</html>

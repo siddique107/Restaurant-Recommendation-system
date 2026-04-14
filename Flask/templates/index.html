@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DineFind — Smart Restaurant Recommendations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        --navy:       #1a1a2e;
+        --navy-deep:  #121220;
+        --card:       #0f3460;
+        --card-light: #1a4070;
+        --red:        #e94560;
+        --red-dark:   #c73652;
+        --red-glow:   rgba(233,69,96,0.18);
+        --red-soft:   rgba(233,69,96,0.12);
+        --white:      #ffffff;
+        --off-white:  #f0f4ff;
+        --muted:      #8b9dc3;
+        --border:     rgba(255,255,255,0.08);
+        --border-red: rgba(233,69,96,0.35);
+        --radius:     14px;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background: var(--navy);
+        color: var(--white);
+        min-height: 100vh;
+      }
+
+      /* ── NAV ── */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 60px;
+        height: 68px;
+        background: var(--navy-deep);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 19px;
+        font-weight: 800;
+        color: var(--white);
+        text-decoration: none;
+        letter-spacing: -0.3px;
+      }
+      .nav-brand .dot { color: var(--red); }
+      .brand-icon {
+        width: 34px; height: 34px;
+        background: var(--red);
+        border-radius: 9px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 15px;
+      }
+      .nav-links { display: flex; gap: 8px; align-items: center; }
+      .nav-links a {
+        text-decoration: none;
+        color: var(--muted);
+        font-weight: 500;
+        font-size: 14px;
+        padding: 7px 16px;
+        border-radius: 8px;
+        transition: all 0.2s;
+      }
+      .nav-links a:hover { color: var(--white); background: var(--border); }
+      .nav-cta {
+        background: var(--red) !important;
+        color: var(--white) !important;
+        font-weight: 600 !important;
+      }
+      .nav-cta:hover { background: var(--red-dark) !important; }
+
+      /* ── HERO ── */
+      .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 110px 24px 70px;
+      }
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--red-soft);
+        border: 1px solid var(--border-red);
+        color: var(--red);
+        font-size: 12px;
+        font-weight: 600;
+        padding: 6px 16px;
+        border-radius: 50px;
+        margin-bottom: 32px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+      .hero h1 {
+        font-size: clamp(36px, 5.5vw, 62px);
+        font-weight: 800;
+        line-height: 1.12;
+        letter-spacing: -1.5px;
+        max-width: 740px;
+        margin-bottom: 22px;
+        color: var(--white);
+      }
+      .hero h1 span { color: var(--red); }
+      .hero p {
+        font-size: 17px;
+        color: var(--muted);
+        max-width: 500px;
+        line-height: 1.75;
+        margin-bottom: 44px;
+      }
+      .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+      .btn-primary {
+        background: var(--red);
+        color: var(--white);
+        padding: 14px 32px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 15px;
+        text-decoration: none;
+        transition: all 0.22s;
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        border: 1px solid transparent;
+      }
+      .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); }
+      .btn-outline {
+        border: 1px solid var(--border-red);
+        color: var(--red);
+        padding: 13px 28px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 15px;
+        text-decoration: none;
+        transition: all 0.22s;
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+      }
+      .btn-outline:hover { background: var(--red-soft); }
+
+      /* ── DIVIDER LINE ── */
+      .divider-line {
+        width: 60px; height: 3px;
+        background: var(--red);
+        border-radius: 2px;
+        margin: 0 auto 60px;
+      }
+
+      /* ── STATS ── */
+      .stats-row {
+        display: flex;
+        justify-content: center;
+        gap: 0;
+        margin: 0 60px 80px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+      .stat {
+        flex: 1;
+        text-align: center;
+        padding: 32px 20px;
+        border-right: 1px solid var(--border);
+      }
+      .stat:last-child { border-right: none; }
+      .stat-num {
+        font-size: 30px;
+        font-weight: 800;
+        color: var(--red);
+        letter-spacing: -1px;
+      }
+      .stat-label {
+        font-size: 13px;
+        color: var(--muted);
+        margin-top: 5px;
+        font-weight: 500;
+      }
+
+      /* ── FEATURES ── */
+      .section { padding: 0 60px 80px; }
+      .section-header { text-align: center; margin-bottom: 52px; }
+      .section-header h2 {
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -0.8px;
+        margin-bottom: 10px;
+      }
+      .section-header p { color: var(--muted); font-size: 15px; }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .feature-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        padding: 32px 26px;
+        border-radius: var(--radius);
+        transition: border-color 0.25s, transform 0.25s;
+        position: relative;
+        overflow: hidden;
+      }
+      .feature-card::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 3px;
+        background: var(--red);
+        transform: scaleX(0);
+        transition: transform 0.25s;
+      }
+      .feature-card:hover { border-color: var(--border-red); transform: translateY(-4px); }
+      .feature-card:hover::after { transform: scaleX(1); }
+      .feature-icon {
+        width: 48px; height: 48px;
+        background: var(--red-soft);
+        border: 1px solid var(--border-red);
+        border-radius: 12px;
+        display: flex; align-items: center; justify-content: center;
+        margin-bottom: 18px;
+        font-size: 18px;
+        color: var(--red);
+      }
+      .feature-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 9px; }
+      .feature-card p { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+      /* ── CTA STRIP ── */
+      .cta-strip {
+        margin: 0 60px 80px;
+        background: var(--card);
+        border: 1px solid var(--border-red);
+        border-radius: 20px;
+        padding: 54px 52px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 32px;
+        flex-wrap: wrap;
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-strip::before {
+        content: '';
+        position: absolute;
+        right: -80px; top: -80px;
+        width: 260px; height: 260px;
+        background: var(--red-soft);
+        border-radius: 50%;
+      }
+      .cta-strip h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px; }
+      .cta-strip p { color: var(--muted); font-size: 15px; }
+      .btn-red {
+        background: var(--red);
+        color: var(--white);
+        padding: 14px 30px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 15px;
+        text-decoration: none;
+        transition: all 0.22s;
+        white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        position: relative;
+        z-index: 1;
+      }
+      .btn-red:hover { background: var(--red-dark); transform: translateY(-2px); }
+
+      /* ── FOOTER ── */
+      footer {
+        text-align: center;
+        padding: 28px;
+        color: var(--muted);
+        font-size: 13px;
+        border-top: 1px solid var(--border);
+      }
+      footer span { color: var(--red); }
+
+      @media (max-width: 768px) {
+        nav { padding: 0 20px; }
+        .hero { padding: 80px 20px 50px; }
+        .stats-row { margin: 0 20px 60px; flex-wrap: wrap; }
+        .stat { min-width: 50%; border-bottom: 1px solid var(--border); }
+        .section { padding: 0 20px 60px; }
+        .cta-strip { margin: 0 20px 60px; padding: 36px 28px; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <nav>
+      <a class="nav-brand" href="/">
+        <div class="brand-icon"><i class="fa-solid fa-utensils"></i></div>
+        Dine<span class="dot">Find</span>
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/recommend">Explore</a>
+        <a href="/recommend" class="nav-cta">Get Started</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-badge">
+        <i class="fa-solid fa-bolt"></i> AI-Powered Recommendations
+      </div>
+      <h1>Find Your Next<br /><span>Favourite</span> Restaurant</h1>
+      <p>Enter any restaurant you love and we'll find similar places filtered by cuisine, budget, and rating — instantly.</p>
+      <div class="hero-btns">
+        <a href="/recommend" class="btn-primary">
+          <i class="fa-solid fa-magnifying-glass"></i> Start Exploring
+        </a>
+        <a href="#features" class="btn-outline">
+          <i class="fa-solid fa-circle-play"></i> See How It Works
+        </a>
+      </div>
+    </section>
+
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-num">7,000+</div>
+        <div class="stat-label">Restaurants</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Cuisine Types</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">AI</div>
+        <div class="stat-label">Powered Matching</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Free</div>
+        <div class="stat-label">No Sign-up Needed</div>
+      </div>
+    </div>
+
+    <section class="section" id="features">
+      <div class="section-header">
+        <h2>Why Use DineFind?</h2>
+        <p>Smart filters, smart results — every time.</p>
+      </div>
+      <div class="features">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-brain"></i></div>
+          <h3>Smart Similarity Engine</h3>
+          <p>Uses TF-IDF and cosine similarity to find restaurants with matching cuisine profiles.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-sliders"></i></div>
+          <h3>Flexible Filters</h3>
+          <p>Filter results by cuisine type, maximum budget, and minimum rating in one go.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-star"></i></div>
+          <h3>Rating-Sorted Results</h3>
+          <p>The highest-rated matches appear first so you always see the best options on top.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+          <h3>Instant Results</h3>
+          <p>No accounts, no waiting. Just type a name and get personalised recommendations.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta-strip">
+      <div>
+        <h2>Ready to discover great food?</h2>
+        <p>Find restaurants similar to ones you already love.</p>
+      </div>
+      <a href="/recommend" class="btn-red">
+        Try It Now &nbsp;<i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+
+    <footer>
+      &copy; 2026 Dine<span>Find</span> &nbsp;&middot;&nbsp; Developed by &middot;&nbsp; Siddique Sanadi
+    </footer>
+
+  </body>
+</html>
